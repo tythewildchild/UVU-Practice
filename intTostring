@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string singles[] = { "zero", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine ", "ten ",
+	"eleven ", "twelve ", "thirteen ", "fourteen ", "fifteen ", "sixteen ", "seventeen ", "eighteen ", "nineteen " };
+string tens[] = {"", "", "twenty ", "thirty ", "forty ", "fifty ", "sixty ", "seventy ", "eighty ", "ninety "};
+
+
+string singlesF(int x) {
+	int num = x;
+	return singles[num];
+}
+string tensF(int x) {
+	int num = x;
+	int tensPlaceholder = num / 10; // gives ten placeholder
+	int singlesPlaceholder = num - tensPlaceholder * 10;
+	string value = tens[tensPlaceholder] + singles[singlesPlaceholder];
+	return value;
+}
+
+int main() {
+	//get a number from the user
+	int num = 0;
+	
+	
+	while(num >= 0){
+		cout << "Enter a number between 0 and 99." << endl;
+		cin >> num;
+
+		//creating an if-else statement that will handle all numbers
+		
+		if (num >= 0 && num < 20) {
+			cout << singlesF(num) << endl;
+		}
+		else if (num >= 20 && num < 100) {
+			cout << tensF(num) << endl;
+		}
+		else if (num >= 100 && num < 1000) {
+			cout << "Not yet done" << endl;
+		}
+		else {
+			cout << "Number is too high" << endl;
+		}
+
+		cout << "enter -1 to quit" << endl;
+		cin >> num;
+		if (num == -1) {
+			break;
+		}
+	}
+
+	return 0;
+}
