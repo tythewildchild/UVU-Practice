@@ -1,11 +1,15 @@
 #include <iostream>
 #include <string>
+#include <cmath>
+#include <vector>
 using namespace std;
 
-string singles[] = { "zero", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine ", "ten ",
+string singles[] = { "", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine ", "ten ",
 	"eleven ", "twelve ", "thirteen ", "fourteen ", "fifteen ", "sixteen ", "seventeen ", "eighteen ", "nineteen " };
+string hun = "hundred ";
 string tens[] = {"", "", "twenty ", "thirty ", "forty ", "fifty ", "sixty ", "seventy ", "eighty ", "ninety "};
-
+string expo[] = { "thousand ", "million ", "billion ", "trillion " };
+vector<int>tripletsArray;
 
 string singlesF(int x) {
 	int num = x;
@@ -18,36 +22,48 @@ string tensF(int x) {
 	string value = tens[tensPlaceholder] + singles[singlesPlaceholder];
 	return value;
 }
+string hundredsF(int x) {
+	int num = x;
+	int hundredsPlaceholder = num / 100;
+	int tensPlaceholder = (num - (hundredsPlaceholder * 100))/10;
+	int onesPlaceholder = num - (hundredsPlaceholder * 100) - (tensPlaceholder * 10);
+	return singles[hundredsPlaceholder] + hun + tens[tensPlaceholder] + singles[onesPlaceholder];
+}
+void tripletsF(int x) {
+	return;
+}
 
 int main() {
 	//get a number from the user
-	int num = 0;
-	
-	
-	while(num >= 0){
-		cout << "Enter a number between 0 and 99." << endl;
+	int num = 0; 
+	while(num != -1000000000000000){
+		cout << "Enter a number under 999 trillion." << endl;
 		cin >> num;
 
 		//creating an if-else statement that will handle all numbers
 		
-		if (num >= 0 && num < 20) {
+		if (num == 0) {
+			cout << "zero" << endl;
+		}
+		else if (num >= 0 && num < 20) {
 			cout << singlesF(num) << endl;
 		}
 		else if (num >= 20 && num < 100) {
 			cout << tensF(num) << endl;
 		}
 		else if (num >= 100 && num < 1000) {
-			cout << "Not yet done" << endl;
+			cout << hundredsF(num) << endl;
+		}
+		else if (num > 999 && num < 999999999999999) {
+			tripletsF(num);
+			for (int i = 0; i < tripletsArray.size(); i++) {
+				cout << tripletsArray[i] << endl;
+			}
 		}
 		else {
 			cout << "Number is too high" << endl;
 		}
-
-		cout << "enter -1 to quit" << endl;
-		cin >> num;
-		if (num == -1) {
-			break;
-		}
+		tripletsArray.clear();
 	}
 
 	return 0;
